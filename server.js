@@ -6,6 +6,9 @@ const cors = require("cors");
 require("dotenv").config();
 app.use(cors());
 app.use(express.json());
+const MoviesDB = require("./modules/moviesDB.js");
+const db = new MoviesDB();
+
 app.get("/", (req, res) => {
   res.json({ msg: "API Listening" });
 });
@@ -13,4 +16,11 @@ app.get("/", (req, res) => {
 function onHttpStart() {
   console.log(`server listening on ${PORT}`);
 }
-app.listen(PORT, onHttpStart);
+
+db.initialize(process.env.MONGODB_CONN_STRING)
+  .then(() => {
+    app.listen(PORT, onHttpStart);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
