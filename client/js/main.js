@@ -1,7 +1,6 @@
 let page = 1;
 const perPage = 10;
-const port = 8000;
-const serverUrl = `http://localhost:${port}/api/movies`;
+const serverUrl = `https://mayankweb422.cyclic.app/api/movies`;
 
 const fetchData = async (page, perPage, title) => {
   let url = `${serverUrl}?page=${page}&perPage=${perPage}`;
