@@ -52,11 +52,7 @@
             <button class="btn btn-outline-success" type="submit">
               Search
             </button>
-            <button
-              class="btn btn-outline-success"
-              id="clearForm"
-              type="submit"
-            >
+            <button class="btn btn-outline-danger" id="clearForm" type="submit">
               Clear
             </button>
           </form>
@@ -67,14 +63,14 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <table class="table" id="moviesTable">
+          <table class="table table-striped" id="moviesTable">
             <thead>
               <tr>
-                <td>Year</td>
-                <td>Title</td>
-                <td>Plot</td>
-                <td>Rating</td>
-                <td>Run Time</td>
+                <th class="col-1">Year</th>
+                <th class="col-2">Title</th>
+                <th class="col-7">Plot</th>
+                <th class="col-1">Rating</th>
+                <th class="col-1">Run Time</th>
               </tr>
             </thead>
             <tbody></tbody>
