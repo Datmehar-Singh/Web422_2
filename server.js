@@ -1,17 +1,17 @@
 /*********************************************************************************
- *  WEB422 – Assignment 1
+ *  WEB422 – Assignment 2
  *  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.
  *  No part of this assignment has been copied manually or electronically from any other source
  *  (including web sites) or distributed to other students.
  *
- *  Name: Mayank Kumar Student ID: 145998217 Date: May 18, 2023
+ *  Name: Mayank Kumar Student ID: 145998217 Date: June 02, 2023
  *  Cyclic Link: https://mayankweb422.cyclic.app
  *
  ********************************************************************************/
 const express = require("express");
 const app = express();
 const path = require("path");
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 require("dotenv").config();
 app.use(cors());
