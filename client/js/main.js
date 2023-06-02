@@ -1,8 +1,10 @@
 let page = 1;
 const perPage = 10;
+const port = 8000;
+const serverUrl = `http://localhost:${port}/api/movies`;
 
 const fetchData = async (page, perPage, title) => {
-  let url = `/api/movies?page=${page}&perPage=${perPage}`;
+  let url = `${serverUrl}?page=${page}&perPage=${perPage}`;
   let hidePagination = false;
 
   if (title) {
@@ -49,7 +51,7 @@ const updateTable = (movies) => {
 
     tbody.insertAdjacentHTML("beforeend", html);
   });
-
+  updateCurrentPage(page);
   addClickEventToRows();
 };
 
@@ -60,6 +62,11 @@ const updatePagination = (hidePagination) => {
   }
 };
 
+const updateCurrentPage = (page) => {
+  const currentPage = document.querySelector("#current-page a");
+  currentPage.textContent = page;
+};
+
 const addClickEventToRows = () => {
   const rows = document.querySelectorAll("#moviesTable tbody tr");
 
@@ -67,7 +74,7 @@ const addClickEventToRows = () => {
     row.addEventListener("click", async () => {
       const movieId = row.dataset.id;
       try {
-        const response = await fetch(`/api/movies/${movieId}`);
+        const response = await fetch(`${serverUrl}/${movieId}`);
         const movieData = await response.json();
         const { title, poster, directors, plot, cast, awards, imdb } =
           movieData;
