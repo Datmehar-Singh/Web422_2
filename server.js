@@ -96,10 +96,20 @@ function onHttpStart() {
   console.log(`server listening on ${PORT}`);
 }
 
-db.initialize(process.env.MONGODB_CONN_STRING)
-  .then(() => {
+const initializeServer = async () => {
+  try {
+    await db.initialize(process.env.MONGODB_CONN_STRING);
     app.listen(PORT, onHttpStart);
+    console.log(`Server started on port ${PORT}`);
+  } catch (err) {
+    throw new Error("Failed to initialize server: " + err.message);
+  }
+};
+
+initializeServer()
+  .then(() => {
+    console.log("Server initialized successfully");
   })
   .catch((err) => {
-    console.log(err);
+    console.error("Error initializing server:", err);
   });
