@@ -85,7 +85,11 @@ const addClickEventToRows = () => {
         modalTitle.textContent = title;
 
         const html = `
-            <img class="img-fluid w-100" src="${poster}"><br><br>
+            ${
+              poster
+                ? `<img class="img-fluid w-100" src="${poster}"><br><br>`
+                : ""
+            }
             <strong>Directed By:</strong> ${directors.join(", ")}<br><br>
             <p>${plot}</p>
             <strong>Cast:</strong> ${
