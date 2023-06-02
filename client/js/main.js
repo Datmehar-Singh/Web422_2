@@ -69,7 +69,7 @@ const addClickEventToRows = () => {
       try {
         const response = await fetch(`/api/movies/${movieId}`);
         const movieData = await response.json();
-        const { title, poster, directors, fullplot, cast, awards, imdb } =
+        const { title, poster, directors, plot, cast, awards, imdb } =
           movieData;
 
         const modalTitle = document.querySelector("#detailsModal .modal-title");
@@ -80,7 +80,7 @@ const addClickEventToRows = () => {
         const html = `
             <img class="img-fluid w-100" src="${poster}"><br><br>
             <strong>Directed By:</strong> ${directors.join(", ")}<br><br>
-            <p>${fullplot}</p>
+            <p>${plot}</p>
             <strong>Cast:</strong> ${
               cast.length > 0 ? cast.join(", ") : "N/A"
             }<br><br>
@@ -104,3 +104,35 @@ const addClickEventToRows = () => {
 const loadMovieData = (title = null) => {
   fetchData(page, perPage, title);
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  const previousPageButton = document.querySelector("#previous-page");
+  const nextPageButton = document.querySelector("#next-page");
+  const searchForm = document.querySelector("#searchForm");
+  const clearFormButton = document.querySelector("#clearForm");
+
+  previousPageButton.addEventListener("click", () => {
+    if (page > 1) {
+      page--;
+      loadMovieData();
+    }
+  });
+
+  nextPageButton.addEventListener("click", () => {
+    page++;
+    loadMovieData();
+  });
+
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const title = document.querySelector("#title").value;
+    loadMovieData(title);
+  });
+
+  clearFormButton.addEventListener("click", () => {
+    document.querySelector("#title").value = "";
+    loadMovieData();
+  });
+
+  loadMovieData();
+});
