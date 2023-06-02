@@ -19,9 +19,13 @@ app.use(express.json());
 const MoviesDB = require("./modules/moviesDB.js");
 const db = new MoviesDB();
 
+app.use(express.static(path.join(__dirname, "client")));
+
+// Set the default route to serve the 'index.html' file
 app.get("/", (req, res) => {
-  res.json({ msg: "API Listening" });
+  res.sendFile(path.join(__dirname, "client", "index.html"));
 });
+
 app.post("/api/movies", async (req, res) => {
   try {
     const newMovie = await db.addNewMovie(req.body);
