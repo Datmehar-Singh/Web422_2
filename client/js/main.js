@@ -1,6 +1,6 @@
 let page = 1;
 const perPage = 10;
-const serverUrl = `https://mayankweb422.cyclic.app/api/movies`;
+const serverUrl = `https://fine-jade-walrus-shoe.cyclic.cloud/`;
 
 const fetchData = async (page, perPage, title) => {
   let url = `${serverUrl}?page=${page}&perPage=${perPage}`;
