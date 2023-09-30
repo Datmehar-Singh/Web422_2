@@ -1,13 +1,13 @@
 let page = 1;
 const perPage = 10;
-const serverUrl = `https://fine-jade-walrus-shoe.cyclic.cloud`;
+const url = `/api/movies`
 
 const fetchData = async (page, perPage, title) => {
-  let url = `${serverUrl}?page=${page}&perPage=${perPage}`;
+  let url = `/api/movies?page=${page}&perPage=${perPage}`;
   let hidePagination = false;
 
   if (title) {
-    url += `&title=${encodeURIComponent(title)}`;
+    url = `/api/movies?page=${page}&perPage=${perPage}&title=${title}`;
     hidePagination = true;
   }
 
@@ -73,7 +73,7 @@ const addClickEventToRows = () => {
     row.addEventListener("click", async () => {
       const movieId = row.dataset.id;
       try {
-        const response = await fetch(`${serverUrl}/${movieId}`);
+        const response = await fetch(`${url}/${movieId}`);
         const movieData = await response.json();
         const { title, poster, directors, plot, cast, awards, imdb } =
           movieData;
